@@ -1,18 +1,50 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header/>
+    <EmptyBoard v-if="cards.length === 0"/>
+    <Board v-else/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Header from '@/components/Header'
+import EmptyBoard from '@/components/EmptyBoard.vue';
+import Board from '@/components/Board.vue';
+
+import { mapState } from 'vuex';
 
 export default {
   name: 'Home',
+  computed: {
+    ...mapState([
+      'cards',
+    ])
+  },
   components: {
-    HelloWorld
+    Header,
+    EmptyBoard,
+    Board
+  },
+  methods: {
   }
 }
 </script>
+
+<style lang="scss">
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.home {
+  text-align: center;
+}
+</style>
